@@ -143,7 +143,7 @@ console.log(localStorage.getItem("tasks"));
 const update_task_button = document.getElementById("update_task");
 const view_task_button = document.getElementById("view_task");
 const edit_task_button = document.getElementById("edit_task");
-const delete_task_button = ocument.getElementById("delete_task");
+const delete_task_button = document.getElementById("delete_task");
 
 function get_task_by_id(id){
     return tasks.find(task => task.id === id);
