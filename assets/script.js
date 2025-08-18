@@ -103,8 +103,8 @@ create_task_button.onclick = function (){
     }
 
     tasks.push(newTask);
-    save_data();
     render_tasks();
+    save_data();
 };
 
 function render_tasks(){
@@ -115,10 +115,10 @@ function render_tasks(){
                                         <div id="percentage_complete">% Complete</div>
                                         <div id="time_left">00:00 left</div>
                                         <div id="overview_buttons">
-                                            <button id="update_task">Update Progress</button>
-                                            <button id="view_task">View</button>
-                                            <button id="edit_task">Edit</button>
-                                            <button id="delete_task">Delete</button>
+                                            <button id="update_task" value="${element.id}">Update Progress</button>
+                                            <button id="view_task" value="${element.id}">View</button>
+                                            <button id="edit_task" value="${element.id}">Edit</button>
+                                            <button id="delete_task" value="${element.id}">Delete</button>
                                         </div> 
                                     </div>`;
     }); 
@@ -139,3 +139,23 @@ window.onload = function(){
     render_tasks();
 }
 console.log(localStorage.getItem("tasks"));
+
+const update_task_button = document.getElementById("update_task");
+const view_task_button = document.getElementById("view_task");
+const edit_task_button = document.getElementById("edit_task");
+const delete_task_button = ocument.getElementById("delete_task");
+
+function get_task_by_id(id){
+    return tasks.find(task => task.id === id);
+}
+
+delete_task_button.onclick = function (){
+    const userid = delete_task_button.value;
+    let a_task = get_task_by_id(userid);
+    if(a_task){
+        console.log("We did it bro", a_task.title, a_task.description)
+    }
+    else{
+        console.log("We learn");
+    }
+}
