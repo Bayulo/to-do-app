@@ -115,10 +115,10 @@ function render_tasks(){
                                         <div id="percentage_complete">% Complete</div>
                                         <div id="time_left">00:00 left</div>
                                         <div id="overview_buttons">
-                                            <button id="update_task" value="${element.id}">Update Progress</button>
-                                            <button id="view_task" value="${element.id}">View</button>
-                                            <button id="edit_task" value="${element.id}">Edit</button>
-                                            <button id="delete_task" value="${element.id}">Delete</button>
+                                            <button class="update_task" data-id="${element.id}">Update Progress</button>
+                                            <button class="view_task" data-id="${element.id}">View</button>
+                                            <button class="edit_task" data-id="${element.id}">Edit</button>
+                                            <button class="delete_task" data-id="${element.id}">Delete</button>
                                         </div> 
                                     </div>`;
     }); 
@@ -140,22 +140,37 @@ window.onload = function(){
 }
 console.log(localStorage.getItem("tasks"));
 
-const update_task_button = document.getElementById("update_task");
-const view_task_button = document.getElementById("view_task");
-const edit_task_button = document.getElementById("edit_task");
-const delete_task_button = document.getElementById("delete_task");
-
 function get_task_by_id(id){
     return tasks.find(task => task.id === id);
 }
 
-delete_task_button.onclick = function (){
-    const userid = delete_task_button.value;
-    let a_task = get_task_by_id(userid);
-    if(a_task){
-        console.log("We did it bro", a_task.title, a_task.description)
+overview_content.onclick = function (e){
+    //delete
+    if(e.target.classList.contains("delete_task")){ //does what you clicked on from the parent element contain class; delete_task?
+        const but_id = parseInt(e.target.dataset.id); //parseInt converts your data-id value (gotten using dataset.id), which is a string to an int
+        let a_task = get_task_by_id(but_id);
+        if(a_task){
+            tasks = tasks.filter(task => task.id !== but_id);
+            save_data();
+            render_tasks();
+        }
     }
-    else{
-        console.log("We learn");
+    if(e.target.classList.contains("view_task")){ //does what you clicked on from the parent element contain class; delete_task?
+        const but_id = parseInt(e.target.dataset.id); //parseInt converts your data-id value (gotten using dataset.id), which is a string to an int
+        let a_task = get_task_by_id(but_id);
+        if(a_task){
+            
+        }
     }
 }
+
+// delete_task_button.onclick = function (){
+//     const userid = delete_task_button.value;
+//     let a_task = get_task_by_id(userid);
+//     if(a_task){
+//         console.log("We did it bro", a_task.title, a_task.description)
+//     }
+//     else{
+//         console.log("We learn");
+//     }
+// }
