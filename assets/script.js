@@ -155,22 +155,55 @@ overview_content.onclick = function (e){
             render_tasks();
         }
     }
+
+    //view task
     if(e.target.classList.contains("view_task")){ //does what you clicked on from the parent element contain class; delete_task?
         const but_id = parseInt(e.target.dataset.id); //parseInt converts your data-id value (gotten using dataset.id), which is a string to an int
         let a_task = get_task_by_id(but_id);
         if(a_task){
-            
+           const this_task_name = document.getElementById("this_task_name");
+           const this_task_description = document.getElementById("this_task_description");
+           const this_task_subtasks = document.getElementById("this_task_subtasks");
+           const this_task_deadline_date = document.getElementById("this_task_deadline_date");
+           const this_task_deadline_time = document.getElementById("this_task_deadline_time");
+           const this_task_date_created = document.getElementById("this_task_date_created");
+
+           this_task_name.textContent = a_task.title;
+           this_task_description.textContent = a_task.description;
+           this_task_subtasks.innerHTML = "";
+           a_task.subtasks.forEach(item => {this_task_subtasks.innerHTML += `<div>${item}</div>`});
+           this_task_deadline_date.textContent = a_task.deadline_date;
+           this_task_deadline_time.textContent = a_task.deadline_time;
+           this_task_date_created.textContent = a_task.date_created;
+
+           dark_background.style.display = "block";
+           view_task_window.style.display = "flex";
         }
     }
 }
 
-// delete_task_button.onclick = function (){
-//     const userid = delete_task_button.value;
-//     let a_task = get_task_by_id(userid);
-//     if(a_task){
-//         console.log("We did it bro", a_task.title, a_task.description)
-//     }
-//     else{
-//         console.log("We learn");
-//     }
+const dark_background = document.getElementById("dark_background");
+const update_task_window = document.getElementById("update_task_window");
+const edit_task_window = document.getElementById("edit_task_window");
+const view_task_window = document.getElementById("view_task_window");
+
+dark_background.addEventListener("click", function(){
+    dark_background.style.display = "none";
+    update_task_window.style.display = "none";
+    edit_task_window.style.display = "none";
+    view_task_window.style.display = "none";
+});
+
+update_task_window.onclick = function() {
+    dark_background.style.display = "block";
+    update_task_window.style.display = "";
+}
+edit_task_window.onclick = function() {
+    dark_background.style.display = "block";
+    update_task_window.style.display = "";
+}
+// view_task_window.onclick = function(e) {
+//     e.preventDefault();
+//     dark_background.style.display = "block";
+//     update_task_window.style.display = "flex";
 // }

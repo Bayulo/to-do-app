@@ -204,6 +204,46 @@ nav{
 #overview_buttons button:hover{
     cursor: pointer;
 }
+#dark_background{
+    border: solid;
+    /* display: none; */
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    position: fixed;
+    background-color:black;
+    opacity: 0.8;
+    z-index: 999;
+}
+#edit_task_window{
+    display: none;
+}
+#update_task_window{
+    display: none;
+}
+#view_task_window{
+    /* display: none; */
+    border: solid;
+    height: 10vh;
+    width: 40%;
+    top: 0;
+    margin: 25vh 27vw;
+    bottom: 0;
+    height: 45vh;
+    position: fixed;
+    background-color: white;
+    z-index: 9999;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    gap: 1rem;
+}
+#this_task_deadline{
+    display: flex;
+    gap: 5rem;
+    margin-left: 8%;
+}
 footer{
     background-color: slategray;
     text-align: center;
