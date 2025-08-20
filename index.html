@@ -6,15 +6,23 @@
     <title>Todo</title>
     <link href="/assets/styles.css" rel="stylesheet">
 </head>
-<body id="body">
+<body>
     <div id="dark_background"></div>
-    <div id="update_task_window"></div>
+    <div id="update_task_window">
+        <div id="update_subtasks">
+            <!-- <div>e.g</div>
+            <div>e.g</div> -->
+        </div>
+        <div id="update_subtasks_done">
+            <!-- <div id="done">Done</div> -->
+        </div>
+        
+    </div>
     <div id="edit_task_window"></div>
     <div id="view_task_window">
-        <div>
-            Task Name: <span id="this_task_name"></span>
-            Description: <span id="this_task_description"></span>
-        </div>
+        <div>Task Name: <span id="this_task_name"></span></div>
+        <div>Description: <span id="this_task_description"></span></div>
+        
         Subtasks: 
         <div id="this_task_subtasks">
 

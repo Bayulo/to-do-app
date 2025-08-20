@@ -86,10 +86,14 @@ create_task_button.onclick = function (){
     const specific_task_time = document.getElementById("time_deadline").value;
 
     let sub_tasks = [];
+    let sub_tasks_status = [];
     //get the subtasks
         for(let k = 1; k <= i; k++){
             let a = document.getElementById(`task_sub_${k}`).value;
-            if (a.trim() !== "") sub_tasks.push(a);
+            if (a.trim() !== "") {
+                sub_tasks.push(a);
+                sub_tasks_status.push(0);
+            }
         }
     
     let newTask = {
@@ -99,7 +103,8 @@ create_task_button.onclick = function (){
         deadline_date: specific_task_date,
         deadline_time: specific_task_time,
         subtasks: sub_tasks,
-        date_ceated: new Date()
+        subtasks_status: sub_tasks_status,
+        date_created: new Date()
     }
 
     tasks.push(newTask);
@@ -180,6 +185,35 @@ overview_content.onclick = function (e){
            view_task_window.style.display = "flex";
         }
     }
+    if(e.target.classList.contains("update_task")){ //does what you clicked on from the parent element contain class; update task?
+        const but_id = parseInt(e.target.dataset.id); //parseInt converts your data-id value (gotten using dataset.id), which is a string to an int
+        let a_task = get_task_by_id(but_id);
+        if(a_task){
+            const update_subtasks = document.getElementById("update_subtasks");
+            const update_subtasks_done = document.getElementById("update_subtasks_done");
+            update_subtasks.innerHTML = "";
+            update_subtasks_done.innerHTML = "";
+
+            console.log(a_task);
+            a_task.subtasks.forEach(item => {
+                update_subtasks.innerHTML += `<div>${item}</div>`;
+                update_subtasks_done.innerHTML += `<div id="done">Done</div>`;
+            });
+
+            dark_background.style.display = "block";
+            update_task_window.style.display = "flex";
+        }
+    }
+    if(e.target.classList.contains("edit_task")){ //does what you clicked on from the parent element contain class; edit_task?
+        const but_id = parseInt(e.target.dataset.id); //parseInt converts your data-id value (gotten using dataset.id), which is a string to an int
+        let a_task = get_task_by_id(but_id);
+        if(a_task){
+           
+        //    dark_background.style.display = "block";
+        //    edit_task_window.style.display = "flex";
+        }
+    }
+
 }
 
 const dark_background = document.getElementById("dark_background");
@@ -194,16 +228,11 @@ dark_background.addEventListener("click", function(){
     view_task_window.style.display = "none";
 });
 
-update_task_window.onclick = function() {
-    dark_background.style.display = "block";
-    update_task_window.style.display = "";
-}
-edit_task_window.onclick = function() {
-    dark_background.style.display = "block";
-    update_task_window.style.display = "";
-}
-// view_task_window.onclick = function(e) {
-//     e.preventDefault();
+// update_task_window.onclick = function() {
 //     dark_background.style.display = "block";
-//     update_task_window.style.display = "flex";
+//     update_task_window.style.display = "";
+// }
+// edit_task_window.onclick = function() {
+//     dark_background.style.display = "block";
+//     update_task_window.style.display = "";
 // }
