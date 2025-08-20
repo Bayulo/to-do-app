@@ -1,0 +1,38 @@
+#details{
+    display: flex;
+    border: solid;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+    gap: 2rem;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+body{
+    display: flex;
+    margin: 30vh 0;
+    justify-content: center;
+}
+#login_text{
+    font-size: larger;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    gap: 1rem;
+}
+input{
+    width: 100%;
+    height: 4vh;
+}
+#buttons{
+    text-align: center;
+}
+button{
+    width: 30%;
+    height: 4vh;
+}
+#signup_link{
+    text-align: center;
+}
