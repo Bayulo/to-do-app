@@ -1,4 +1,32 @@
 // window.localStorage.clear();
+function get_users(){
+    const stored_users = localStorage.getItem("todo_app_user_credentials");
+    if(stored_users){
+        return JSON.parse(stored_users);
+    }
+    else{
+        return [];
+    }
+}
+let current_user = localStorage.getItem("current_user");
+let user_list = get_users();
+if(current_user){
+    let user_requesting = JSON.parse(current_user);
+    console.log("user list ", user_list);
+    console.log("user_requesting ",user_requesting);
+    console.log(user_list.find((user) => user.username == user_requesting[0].username));
+    
+    if(!user_list.find(user => user.username ==  user_requesting[0].username && user_requesting[0].login_status == 1)){
+        window.location.href = "login.html";
+        // console.log("redirect 1");
+        
+    }
+}
+else{
+    window.location.href = "login.html";
+        // console.log("redirect 2");
+
+}
 
 const dashboard_button = document.getElementById("dashboard");
 const overview_button = document.getElementById("overview");
@@ -143,7 +171,7 @@ window.onload = function(){
     show_data();
     render_tasks();
 }
-console.log(localStorage.getItem("tasks"));
+// console.log(localStorage.getItem("tasks"));
 
 function get_task_by_id(id){
     return tasks.find(task => task.id === id);

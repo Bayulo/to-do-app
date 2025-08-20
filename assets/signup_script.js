@@ -9,14 +9,15 @@ signup_button.onclick = function (e){
     const newuser_password = document.getElementById("password").value;
 
     //check if we have an old user with these credentials
-    system_users = get_users();
+    let system_users = get_users();
     if(system_users.find(a_user => a_user.username === newuser_name)){
         alert("choose another username");
     }
     else{
         newuser = {
             username: newuser_name.trim(),
-            password: newuser_password
+            password: newuser_password,
+            login_status: 0
         };
         users.push(newuser);
         save_signup_data();
