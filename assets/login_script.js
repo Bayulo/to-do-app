@@ -22,7 +22,8 @@ function verify_user_details(e){
         save_current_logged_user(current_user);
     }
     else{
-        alert("Invalid user name or password");
+        document.getElementById("errors").innerHTML = "Invalid user name or password";
+        // alert("Invalid user name or password");
     }
 }
 

@@ -8,13 +8,13 @@ function get_users(){
         return [];
     }
 }
-let current_user = localStorage.getItem("current_user");
+let user_requesting = JSON.parse(localStorage.getItem("current_user"));
 let user_list = get_users();
-if(current_user){
+if(user_requesting){
     let user_requesting = JSON.parse(current_user);
-    console.log("user list ", user_list);
-    console.log("user_requesting ",user_requesting);
-    console.log(user_list.find((user) => user.username == user_requesting[0].username));
+    // console.log("user list ", user_list);
+    // console.log("user_requesting ",user_requesting);
+    // console.log(user_list.find((user) => user.username == user_requesting[0].username));
     
     if(!user_list.find(user => user.username ==  user_requesting[0].username && user_requesting[0].login_status == 1)){
         window.location.href = "login.html";
@@ -102,7 +102,7 @@ add_subtask.onclick = function (){
 //         i--;
 //     }
 // }
-
+document.getElementById("current_user").textContent = user_requesting[0].username;
 let tasks = [];
 
 const create_task_button = document.getElementById("create_task_button");
@@ -132,7 +132,7 @@ create_task_button.onclick = function (){
         deadline_time: specific_task_time,
         subtasks: sub_tasks,
         subtasks_status: sub_tasks_status,
-        date_created: new Date()
+        date_created: new Date().toLocaleString()
     }
 
     tasks.push(newTask);
@@ -174,7 +174,7 @@ window.onload = function(){
 // console.log(localStorage.getItem("tasks"));
 
 function get_task_by_id(id){
-    return tasks.find(task => task.id === id);
+    return tasks.find(task => task.id == id);
 }
 
 overview_content.onclick = function (e){

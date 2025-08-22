@@ -1,17 +1,22 @@
 #details{
     display: flex;
-    border: solid;
+    border: 1px solid;
     flex-direction: column;
     align-items: center;
     width: 30%;
     gap: 2rem;
     border-radius: 1rem;
     padding: 1rem;
+    min-width: 270px;
+    background-color: white;
+    box-shadow: 0px 5px 5px 0px;
 }
 body{
     display: flex;
     margin: 30vh 0;
-    justify-content: center;
+    background-color: rgb(239, 216, 222);
+    flex-direction: column;
+    align-items: center;
 }
 #login_text{
     font-size: larger;
@@ -31,8 +36,18 @@ input{
 }
 button{
     width: 30%;
-    height: 4vh;
+    height: 5vh;
+    color: white;
+    font-size: large;
+    background-color: rgb(233, 75, 117);
+    border-radius: 0.5rem;
+    cursor: pointer;
 }
 #signup_link{
+    text-align: center;
+}
+p{
+    color: red;
+    font-size: 1.3rem;
     text-align: center;
 }

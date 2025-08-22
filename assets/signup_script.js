@@ -13,6 +13,12 @@ signup_button.onclick = function (e){
     if(system_users.find(a_user => a_user.username === newuser_name)){
         alert("choose another username");
     }
+    else if(newuser_name.length < 5){
+        document.getElementById("errors").innerHTML = "User name must be greater than 5 characters";
+    }
+    else if(newuser_password.length < 7){
+        document.getElementById("errors").innerHTML = "Password must be greater than 7 characters";
+    }
     else{
         newuser = {
             username: newuser_name.trim(),
