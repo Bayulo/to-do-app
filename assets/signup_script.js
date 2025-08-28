@@ -21,6 +21,7 @@ signup_button.onclick = function (e){
     }
     else{
         newuser = {
+            userid: Math.round((Date.now())/1000),
             username: newuser_name.trim(),
             password: newuser_password,
             login_status: 0

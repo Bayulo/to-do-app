@@ -9,14 +9,10 @@ function get_users(){
     }
 }
 let user_requesting = JSON.parse(localStorage.getItem("current_user"));
-let user_list = get_users();
-if(user_requesting){
-    let user_requesting = JSON.parse(current_user);
-    // console.log("user list ", user_list);
-    // console.log("user_requesting ",user_requesting);
-    // console.log(user_list.find((user) => user.username == user_requesting[0].username));
-    
-    if(!user_list.find(user => user.username ==  user_requesting[0].username && user_requesting[0].login_status == 1)){
+let users = get_users();
+document.getElementById("current_user").textContent = user_requesting[0].username;
+if(user_requesting){ 
+    if(!users.find(user => user.username ==  user_requesting[0].username && user_requesting[0].login_status == 1)){
         window.location.href = "login.html";
         // console.log("redirect 1");
         
@@ -102,7 +98,6 @@ add_subtask.onclick = function (){
 //         i--;
 //     }
 // }
-document.getElementById("current_user").textContent = user_requesting[0].username;
 let tasks = [];
 
 const create_task_button = document.getElementById("create_task_button");
@@ -132,29 +127,31 @@ create_task_button.onclick = function (){
         deadline_time: specific_task_time,
         subtasks: sub_tasks,
         subtasks_status: sub_tasks_status,
-        date_created: new Date().toLocaleString()
+        date_created: new Date().toLocaleString(),
+        user_id: user_requesting[0].userid
     }
 
     tasks.push(newTask);
     render_tasks();
     save_data();
 };
-
 function render_tasks(){
-    overview_content.innerHTML = "";
-    tasks.forEach(element => {
-        overview_content.innerHTML += `<div id="task_overview">
-                                        <div id="overview_task_name">${element.title}</div>
-                                        <div id="percentage_complete">% Complete</div>
-                                        <div id="time_left">00:00 left</div>
-                                        <div id="overview_buttons">
-                                            <button class="update_task" data-id="${element.id}">Update Progress</button>
-                                            <button class="view_task" data-id="${element.id}">View</button>
-                                            <button class="edit_task" data-id="${element.id}">Edit</button>
-                                            <button class="delete_task" data-id="${element.id}">Delete</button>
-                                        </div> 
-                                    </div>`;
-    }); 
+        overview_content.innerHTML = "";
+        tasks.forEach(element => {
+            if(element.user_id == user_requesting[0].userid){ //display only for the specific user
+            overview_content.innerHTML += `<div id="task_overview">
+                                            <div id="overview_task_name">${element.title}</div>
+                                            <div id="percentage_complete">% Complete</div>
+                                            <div id="time_left">00:00 left</div>
+                                            <div id="overview_buttons">
+                                                <button class="update_task" data-id="${element.id}">Update Progress</button>
+                                                <button class="view_task" data-id="${element.id}">View</button>
+                                                <button class="edit_task" data-id="${element.id}">Edit</button>
+                                                <button class="delete_task" data-id="${element.id}">Delete</button>
+                                            </div> 
+                                        </div>`;
+            }
+        });
 }
 
 function save_data(){
