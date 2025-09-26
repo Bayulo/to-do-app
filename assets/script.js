@@ -152,9 +152,19 @@ function render_tasks(){
         overview_content.innerHTML = "";
         tasks.forEach(element => {
             if(element.user_id == user_requesting[0].userid){ //display only for the specific user
+
+                //count the number of done subtasks and calculate the percentage per task
+                let done_tasks = 0;
+                for(i = 0; i < element.subtasks_status.length; i++){
+                    if(element.subtasks_status[i] == 1){
+                        done_tasks++;
+                    }
+                }
+                let complete_percent = (done_tasks)/element.subtasks_status.length * 100;
+                complete_percent = Math.round(complete_percent * 10) / 10;
             overview_content.innerHTML += `<div id="task_overview">
                                             <div id="overview_task_name">${element.title}</div>
-                                            <div id="percentage_complete">% Complete</div>
+                                            <div id="percentage_complete">${complete_percent}% Complete</div>
                                             <div id="time_left">00:00 left</div>
                                             <div id="overview_buttons">
                                                 <button class="update_task" data-id="${element.id}">Update Progress</button>
