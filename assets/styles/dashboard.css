@@ -169,12 +169,13 @@ nav{
     height: 15%;
     text-align: center;
 }
-#create_task_button{
+#create_task_button, #update_task_button{
     background-color:rgb(179, 0, 92);
     color: white;
     width: 15%;
     height: 3rem;
     border-radius: 1rem;
+    cursor: pointer;
 }
 #task_overview{
     border: 1.6px solid;

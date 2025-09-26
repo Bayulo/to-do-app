@@ -313,7 +313,7 @@ overview_content.onclick = function (e){
                                                 <div>Date: <input type="date" id="date_deadline" value="${a_task.deadline_date}"required><br></div>
                                                 <div>Time: <input type="time" id="time_deadline" value="${a_task.deadline_time}"required></div>
                                             </div>
-                                            <div id="create_task"><button id="create_task_button">Update</button></div>`
+                                            <div id="create_task"><button id="update_task_button">Update</button></div>`
 
 
            dark_background.style.display = "block";
