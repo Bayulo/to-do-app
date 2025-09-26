@@ -232,19 +232,20 @@ nav{
     border-radius: 1rem;
     padding: 2rem;
     gap: 1.5rem;
+    flex-direction: column;
 }
-#update_subtasks{
+#update_subtasks, #completed_subtasks{
     display: flex;
     flex-direction: column;
     padding: 0.5rem;
     gap: 1.5rem;
 }
-#update_subtasks_done{
+#update_subtasks div, #completed_subtasks div{
     display: flex;
-    flex-direction: column;
-    gap: 0.1rem;
+    align-items: center;
+    gap: 3rem;
 }
-#done{
+.done, .undo{
     border: solid;
     height: max-content;
     border-radius: 1rem;

@@ -1,3 +1,4 @@
+// window.localStorage.clear("current_user");
 function get_users(){ //get saved users
     const stored_users = localStorage.getItem("todo_app_user_credentials");
     if(stored_users){

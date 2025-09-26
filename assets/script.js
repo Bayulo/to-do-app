@@ -10,13 +10,13 @@ function get_users(){
 }
 let user_requesting = JSON.parse(localStorage.getItem("current_user"));
 let users = get_users();
-document.getElementById("current_user").textContent = user_requesting[0].username;
 if(user_requesting){ 
     if(!users.find(user => user.username ==  user_requesting[0].username && user_requesting[0].login_status == 1)){
         window.location.href = "login.html";
         // console.log("redirect 1");
         
     }
+    document.getElementById("current_user").textContent = user_requesting[0].username;
 }
 else{
     window.location.href = "login.html";
@@ -110,6 +110,7 @@ create_task_button.onclick = function (){
 
     let sub_tasks = [];
     let sub_tasks_status = [];
+
     //get the subtasks
         for(let k = 1; k <= i; k++){
             let a = document.getElementById(`task_sub_${k}`).value;
@@ -210,25 +211,60 @@ overview_content.onclick = function (e){
            view_task_window.style.display = "flex";
         }
     }
+
+    //update task
     if(e.target.classList.contains("update_task")){ //does what you clicked on from the parent element contain class; update task?
         const but_id = parseInt(e.target.dataset.id); //parseInt converts your data-id value (gotten using dataset.id), which is a string to an int
         let a_task = get_task_by_id(but_id);
         if(a_task){
             const update_subtasks = document.getElementById("update_subtasks");
-            const update_subtasks_done = document.getElementById("update_subtasks_done");
+            const completed_subtasks = document.getElementById("completed_subtasks");
             update_subtasks.innerHTML = "";
-            update_subtasks_done.innerHTML = "";
+            completed_subtasks.innerHTML = "Completed:";
 
             console.log(a_task);
+            let count = 0;
             a_task.subtasks.forEach(item => {
-                update_subtasks.innerHTML += `<div>${item}</div>`;
-                update_subtasks_done.innerHTML += `<div id="done">Done</div>`;
+                if (a_task.subtasks_status[count] != 1){
+                    update_subtasks.innerHTML += `<div>
+                                                    <div>${item}</div>
+                                                    <div class="done" data-id="${count}">Done</div>
+                                                </div>`
+                }
+                else{
+                    completed_subtasks.innerHTML += `<div>
+                                                        <div>${item}</div>
+                                                        <div class="undo" data-id="${count}">Undo</div>
+                                                    </div>`
+                }
+                count++;
+            });
+
+            //done button function
+            const done_buttons = document.querySelectorAll(".done");
+            done_buttons.forEach(item =>
+                item.onclick = function(e){
+                    let completed_subtask_index = e.target.dataset.id;
+                    a_task.subtasks_status[completed_subtask_index] = 1;
+                    save_data();
+                    //console.log(a_task.subtasks_status)
+            });
+            //undo button function
+            const undo_buttons = document.querySelectorAll(".undo");
+            undo_buttons.forEach(item =>
+                item.onclick = function(e){
+                    let completed_subtask_index = e.target.dataset.id;
+                    a_task.subtasks_status[completed_subtask_index] = 0;
+                    save_data();
+                    //console.log(a_task.subtasks_status)
             });
 
             dark_background.style.display = "block";
             update_task_window.style.display = "flex";
         }
     }
+
+
     if(e.target.classList.contains("edit_task")){ //does what you clicked on from the parent element contain class; edit_task?
         const but_id = parseInt(e.target.dataset.id); //parseInt converts your data-id value (gotten using dataset.id), which is a string to an int
         let a_task = get_task_by_id(but_id);

@@ -1,7 +1,7 @@
 //Sign Up
 //get data
 // window.localStorage.clear();
-let users = get_users();
+let users = [];
 const signup_button = document.getElementById("signup_button");
 signup_button.onclick = function (e){
     e.preventDefault();
