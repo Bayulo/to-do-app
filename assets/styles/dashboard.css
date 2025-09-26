@@ -8,11 +8,29 @@ header{
     font-size: 3vh;
 }
 #greeting{
-    text-align: center;
+    align-items: center;
     height: 15vh;
     background-color: rgb(179, 0, 92);
     color: rgb(242, 239, 239);
     margin-top: -23vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+}
+#logout_button{
+    border: 1px solid;
+    height: fit-content;
+    padding: 8px;
+    background-color: rgb(213, 6, 113);
+    border-radius: 10px;
+    margin-left: auto;
+    cursor: pointer;
+}
+#logout_button:hover{
+    background-color: rgb(249, 56, 156);
+    transition: all 0.3s;
+    scale: 1.1;
 }
 nav{
     display: flex;

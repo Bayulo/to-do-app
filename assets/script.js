@@ -8,9 +8,21 @@ function get_users(){
         return [];
     }
 }
+function save_current_logged_user(user){
+    localStorage.setItem("current_user", JSON.stringify(user));
+}
+//logout
+const logout_button = document.getElementById("logout_button");
+logout_button.onclick = function(){
+    user_requesting = [];
+    save_current_logged_user(user_requesting);
+    window.location.href = "login.html";
+}
+
+
 let user_requesting = JSON.parse(localStorage.getItem("current_user"));
 let users = get_users();
-if(user_requesting){ 
+if(user_requesting.length != 0){ 
     if(!users.find(user => user.username ==  user_requesting[0].username && user_requesting[0].login_status == 1)){
         window.location.href = "login.html";
         // console.log("redirect 1");
@@ -298,6 +310,3 @@ dark_background.addEventListener("click", function(){
 //     update_task_window.style.display = "";
 // }
 
-
-
-//login

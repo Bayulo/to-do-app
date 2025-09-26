@@ -17,7 +17,7 @@ function verify_user_details(e){
     // let users = get_users();
 
    let user_requesting = users.find(user => user.username === username && user.password === password);
-   if(user_requesting){ //if you find a saved user with thesame inputed user name and password
+   if(user_requesting){ //if you can find a saved user with thesame inputed user name and password
         //change the log in status of any previosly logged in user
         let prev_logged_in = users.find(user => user.login_status == 1);
         if(prev_logged_in){
