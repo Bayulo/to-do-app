@@ -236,6 +236,15 @@ nav{
 }
 #edit_task_window{
     display: none;
+    z-index: 9999;
+    position: fixed;
+    flex-direction: column;
+    border: solid;
+    padding: 20px;
+    background-color: white;
+    border-radius: 1rem;
+    top: 0;
+    bottom: 0;
 }
 #update_task_window{
     display: none;

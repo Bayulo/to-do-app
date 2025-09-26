@@ -8,15 +8,29 @@
 </head>
 <body>
     <div id="dark_background"></div>
+
+    <!-- update_task window -->
     <div id="update_task_window">
         <div id="update_subtasks">
-            <!-- <div>e.g</div>
-            <div id="done">Done</div> -->
         </div>
         <div id="completed_subtasks">
         </div>
     </div>
-    <div id="edit_task_window"></div>
+
+    <!-- edit task window -->
+    <div id="edit_task_window">
+        <div id="task_sub">
+            Subtasks:<br>
+            <div id="sub_task">
+                <div>1:<input id="task_sub_1" type="text" required></div>
+                <div>2:<input id="task_sub_2" type="text" required></div>
+            </div> 
+            <div id="task_sub_buttons"><button id="add_subtask">Add subtask</button><!--<button id="reduce_subtask">Reduce subtask</button>--></div>
+        </div>
+        <div id="create_task"><button id="create_task_button">Create Task</button></div>
+    </div>
+
+    <!-- view task window -->
     <div id="view_task_window">
         <div>Task Name: <span id="this_task_name"></span></div>
         <div>Description: <span id="this_task_description"></span></div>

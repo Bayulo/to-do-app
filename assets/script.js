@@ -286,14 +286,38 @@ overview_content.onclick = function (e){
         }
     }
 
-
+// edit task window
     if(e.target.classList.contains("edit_task")){ //does what you clicked on from the parent element contain class; edit_task?
         const but_id = parseInt(e.target.dataset.id); //parseInt converts your data-id value (gotten using dataset.id), which is a string to an int
         let a_task = get_task_by_id(but_id);
+
         if(a_task){
-           
-        //    dark_background.style.display = "block";
-        //    edit_task_window.style.display = "flex";
+            const edit_task_window = document.getElementById("edit_task_window");
+            edit_task_window.innerHTML = ""
+            edit_task_window.innerHTML += `<div>
+                                                Task Name: <input type= "text" id="task_name" value="${a_task.title}" required>
+                                            </div>
+                                            <div id="des_task">
+                                                <span>Description: </span><textarea id="task_des">${a_task.description}</textarea>
+                                            </div>
+                                            <div id="sub_task">
+                                            
+                                            ${a_task.subtasks.map((item, index) => `
+                                                <div>
+                                                    <input id="task_sub_${index+1}" type="text" value="${item}" required>
+                                                </div>
+                                            `).join("")}
+                                            </div> 
+                                            <div id="deadline">
+                                                Deadline:
+                                                <div>Date: <input type="date" id="date_deadline" value="${a_task.deadline_date}"required><br></div>
+                                                <div>Time: <input type="time" id="time_deadline" value="${a_task.deadline_time}"required></div>
+                                            </div>
+                                            <div id="create_task"><button id="create_task_button">Update</button></div>`
+
+
+           dark_background.style.display = "block";
+           edit_task_window.style.display = "flex";
         }
     }
 
