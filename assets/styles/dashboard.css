@@ -16,7 +16,7 @@ header{
     display: flex;
     justify-content: center;
     flex-direction: column;
-    padding: 20px;
+    padding: 10px 20px;
 }
 #logout_button{
     border: 1px solid;
@@ -53,6 +53,7 @@ nav{
 #overview_content{
     display: none;
     height: 80vh;
+    padding: 10px;
 }
 #create_content{
     display: none;

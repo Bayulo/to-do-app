@@ -1,7 +1,7 @@
 //Sign Up
 //get data
 // window.localStorage.clear();
-let users = [];
+
 const signup_button = document.getElementById("signup_button");
 signup_button.onclick = function (e){
     e.preventDefault();
@@ -26,14 +26,15 @@ signup_button.onclick = function (e){
             password: newuser_password,
             login_status: 0
         };
-        users.push(newuser);
-        save_signup_data();
+        system_users.push(newuser);
+        save_signup_data(system_users);
         window.location.href = "login.html";
     }
 }
+
 console.log(localStorage.getItem("todo_app_user_credentials"));
-function save_signup_data(){
-    localStorage.setItem("todo_app_user_credentials", JSON.stringify(users));
+function save_signup_data(all_users){
+    localStorage.setItem("todo_app_user_credentials", JSON.stringify(all_users));
 }
 
 function get_users(){

@@ -43,4 +43,4 @@ function save_current_logged_user(user){
 }
 const login_button = document.getElementById("login");
 login_button.onclick = verify_user_details;
-console.log(localStorage.getItem("current_user"));
+//console.log(localStorage.getItem("current_user"));
