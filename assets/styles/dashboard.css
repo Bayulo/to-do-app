@@ -148,17 +148,23 @@ nav{
     border-radius: 1rem;
     margin-left: 2rem;
 }
-#task_sub button{
+#task_sub button, #edit_add_subtask{
     width: 6rem;
     background-color:rgb(179, 0, 92);
     color: white;
     border-radius: 0.7rem;
+    padding: 0.5rem;
 }
 #task_sub_buttons{
     display: flex;
     justify-content: center;
     gap: 5%;
     height: 2rem;
+}
+#edit_sub_tasks{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 #deadline{
     display: flex;
@@ -169,7 +175,7 @@ nav{
     height: 15%;
     text-align: center;
 }
-#create_task_button, #update_task_button{
+#create_task_button, #edit_task_button{
     background-color:rgb(179, 0, 92);
     color: white;
     width: 15%;

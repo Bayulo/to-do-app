@@ -51,7 +51,6 @@ const dash_overview = document.getElementById("dash_overview");
 const dash_priority = document.getElementById("dash_priority");
 
 const add_subtask = document.getElementById("add_subtask");
-const remove_subtask = document.getElementById("remove_subtask");
 
 dashboard_button.onclick = function (){
     dashboard_content.style.display = "flex";
@@ -104,12 +103,7 @@ add_subtask.onclick = function (){
         document.getElementById("sub_task").innerHTML += `<div>${i}:<input id="task_sub_${i}" type="text"></div>`;
     }
 }
-// remove_subtask.onclick = function (){
-//     if (i > 2){
-//         document.getElementById("sub_task").removeChild(`<div>${i}:<input id="task_sub_${i}" type="text"></div>`);
-//         i--;
-//     }
-// }
+
 let tasks = [];
 
 const create_task_button = document.getElementById("create_task_button");
@@ -293,29 +287,66 @@ overview_content.onclick = function (e){
 
         if(a_task){
             const edit_task_window = document.getElementById("edit_task_window");
-            edit_task_window.innerHTML = ""
+            edit_task_window.innerHTML = "";
             edit_task_window.innerHTML += `<div>
                                                 Task Name: <input type= "text" id="task_name" value="${a_task.title}" required>
                                             </div>
                                             <div id="des_task">
                                                 <span>Description: </span><textarea id="task_des">${a_task.description}</textarea>
                                             </div>
-                                            <div id="sub_task">
+                                            <div id="edit_sub_tasks">
                                             
                                             ${a_task.subtasks.map((item, index) => `
                                                 <div>
-                                                    <input id="task_sub_${index+1}" type="text" value="${item}" required>
+                                                    <input id="edit_task_sub_${index+1}" type="text" value="${item}" required>
                                                 </div>
                                             `).join("")}
                                             </div> 
+                                            <button id="edit_add_subtask">Add subtask</button>
                                             <div id="deadline">
                                                 Deadline:
                                                 <div>Date: <input type="date" id="date_deadline" value="${a_task.deadline_date}"required><br></div>
                                                 <div>Time: <input type="time" id="time_deadline" value="${a_task.deadline_time}"required></div>
                                             </div>
-                                            <div id="create_task"><button id="update_task_button">Update</button></div>`
+                                            <div id="create_task"><button id="edit_task_button">Edit</button></div>`;
 
+            //add edit subtask fields
+            const edit_add_subtask = document.getElementById("edit_add_subtask");
+                const edit_sub_tasks = document.getElementById("edit_sub_tasks");
+                let task_length = a_task.subtasks.length;
+                edit_add_subtask.onclick = function(e){
+                    e.preventDefault();
+                    task_length++;
+                    edit_sub_tasks.innerHTML += `<div><input id="edit_task_sub_${task_length}" type="text"></div>`;
+                    console.log(task_length)
+                }
 
+            const edit_task_button = document.getElementById("edit_task_button");
+            edit_task_button.onclick = function(){
+                //store the edited title and description
+                const edited_task_name = document.getElementById("task_name").value
+                const edited_task_des = document.getElementById("task_des").value
+                a_task.title = edited_task_name;
+                a_task.description = edited_task_des;
+
+                //store the edited subtasks
+                a_task.subtasks = [];
+                a_task.subtasks_status = [];
+                for(let b = 1; b <= task_length; b++){
+                    let c = document.getElementById(`edit_task_sub_${b}`).value;
+                    if (c.trim() !== ""){
+                        a_task.subtasks.push(c);
+                        a_task.subtasks_status.push(0);
+                    }
+                }
+
+                //store the edited dates
+                const edited_date_deadline = document.getElementById("date_deadline").value
+                const edited_time_deadline = document.getElementById("time_deadline").value
+                a_task.deadline_date = edited_date_deadline;
+                a_task.deadline_time = edited_time_deadline;
+                save_data();
+            }
            dark_background.style.display = "block";
            edit_task_window.style.display = "flex";
         }
