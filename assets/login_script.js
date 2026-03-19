@@ -10,6 +10,7 @@ function get_users(){ //get saved users
 }
 let current_user = [];
 let users = get_users();
+console.log(users)
 function verify_user_details(e){
     e.preventDefault();
     const username = document.getElementById("username").value;

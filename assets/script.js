@@ -16,22 +16,22 @@ const logout_button = document.getElementById("logout_button");
 logout_button.onclick = function(){
     user_requesting = [];
     save_current_logged_user(user_requesting);
-    window.location.href = "login.html";
+    window.location.href = "/login.html";
 }
 
 
-let user_requesting = JSON.parse(localStorage.getItem("current_user"));
+let user_requesting = JSON.parse(localStorage.getItem("current_user")) || [];
 let users = get_users();
 if(user_requesting.length != 0){ 
     if(!users.find(user => user.username ==  user_requesting[0].username && user_requesting[0].login_status == 1)){
-        window.location.href = "login.html";
+        window.location.href = "/login.html";
         // console.log("redirect 1");
         
     }
     document.getElementById("current_user").textContent = user_requesting[0].username;
 }
 else{
-    window.location.href = "login.html";
+    window.location.href = "/login.html";
         // console.log("redirect 2");
 
 }
@@ -164,8 +164,8 @@ function render_tasks(){
 
                 //count the number of done subtasks and calculate the percentage per task
                 let done_tasks = 0;
-                for(i = 0; i < element.subtasks_status.length; i++){
-                    if(element.subtasks_status[i] == 1){
+                for(j = 0; j < element.subtasks_status.length; j++){
+                    if(element.subtasks_status[j] == 1){
                         done_tasks++;
                     }
                 }
