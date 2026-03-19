@@ -97,9 +97,10 @@ dash_priority.onclick = function() {
 }
 
 let i = 2;
-add_subtask.onclick = function (){
+add_subtask.onclick = function (e){
+    e.preventDefault();
     i++;
-    if (i > 2 && i < 11){
+    if (i < 11){
         document.getElementById("sub_task").innerHTML += `<div>${i}:<input id="task_sub_${i}" type="text"></div>`;
     }
 }
@@ -125,22 +126,36 @@ create_task_button.onclick = function (){
                 sub_tasks_status.push(0);
             }
         }
-    
-    let newTask = {
-        id: Date.now(),
-        title: specific_task_title,
-        description: specific_task_description,
-        deadline_date: specific_task_date,
-        deadline_time: specific_task_time,
-        subtasks: sub_tasks,
-        subtasks_status: sub_tasks_status,
-        date_created: new Date().toLocaleString(),
-        user_id: user_requesting[0].userid
+    if (specific_task_title == ""){
+        error_pop_show("Please enter the task's title");
     }
-
-    tasks.push(newTask);
-    render_tasks();
-    save_data();
+    else if (specific_task_description == ""){
+        error_pop_show("Please enter the task's description");
+    }
+    else if(sub_tasks.length < 2){
+        error_pop_show("You must enter atleast 2 subtasks");
+    }
+    else if (specific_task_date == "" || specific_task_time == ""){
+        error_pop_show("Enter the date and time deadlines");
+    }
+    else{
+        let newTask = {
+            id: Date.now(),
+            title: specific_task_title,
+            description: specific_task_description,
+            deadline_date: specific_task_date,
+            deadline_time: specific_task_time,
+            subtasks: sub_tasks,
+            subtasks_status: sub_tasks_status,
+            date_created: new Date().toLocaleString(),
+            user_id: user_requesting[0].userid
+        }
+    
+        tasks.push(newTask);
+        render_tasks();
+        save_data();
+        error_pop_show("Task Created Successfully");
+    }
 };
 function render_tasks(){
         overview_content.innerHTML = "";
@@ -189,6 +204,20 @@ window.onload = function(){
 
 function get_task_by_id(id){
     return tasks.find(task => task.id == id);
+}
+
+function error_pop_show(message){
+    const error_message_window = document.getElementById("error_message_window");
+    const error_message = document.getElementById("error_message");
+    error_message.textContent = message;
+    error_message_window.style.display = "flex";
+    dark_background.style.display = "block"; 
+}
+
+//ok button function
+const ok_button = document.getElementById("ok_button");
+ok_button.onclick = function(){
+    hide_dark_background();
 }
 
 overview_content.onclick = function (e){
@@ -308,7 +337,7 @@ overview_content.onclick = function (e){
                                                 <div>Date: <input type="date" id="date_deadline" value="${a_task.deadline_date}"required><br></div>
                                                 <div>Time: <input type="time" id="time_deadline" value="${a_task.deadline_time}"required></div>
                                             </div>
-                                            <div id="create_task"><button id="edit_task_button">Edit</button></div>`;
+                                            <div id="create_task"><button id="edit_task_button">Save</button></div>`;
 
             //add edit subtask fields
             const edit_add_subtask = document.getElementById("edit_add_subtask");
@@ -358,13 +387,18 @@ const dark_background = document.getElementById("dark_background");
 const update_task_window = document.getElementById("update_task_window");
 const edit_task_window = document.getElementById("edit_task_window");
 const view_task_window = document.getElementById("view_task_window");
+const error_message_window = document.getElementById("error_message_window")
 
-dark_background.addEventListener("click", function(){
+function hide_dark_background(){
     dark_background.style.display = "none";
     update_task_window.style.display = "none";
     edit_task_window.style.display = "none";
     view_task_window.style.display = "none";
-});
+    error_message_window.style.display = "none";
+}
+dark_background.onclick = function(){
+    hide_dark_background();
+};
 
 // update_task_window.onclick = function() {
 //     dark_background.style.display = "block";

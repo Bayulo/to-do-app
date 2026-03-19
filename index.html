@@ -9,7 +9,7 @@
 <body>
     <div id="dark_background"></div>
 
-    <!-- update_task window -->
+    <!-- update_task pop -->
     <div id="update_task_window">
         <div id="update_subtasks">
         </div>
@@ -17,20 +17,12 @@
         </div>
     </div>
 
-    <!-- edit task window -->
+    <!-- edit task pop -->
     <div id="edit_task_window">
-        <div id="task_sub">
-            Subtasks:<br>
-            <div id="sub_task">
-                <div>1:<input id="task_sub_1" type="text" required></div>
-                <div>2:<input id="task_sub_2" type="text" required></div>
-            </div> 
-            <div id="task_sub_buttons"><button id="add_subtask">Add subtask</button><!--<button id="reduce_subtask">Reduce subtask</button>--></div>
-        </div>
-        <div id="create_task"><button id="create_task_button">Create Task</button></div>
+    
     </div>
 
-    <!-- view task window -->
+    <!-- view task pop -->
     <div id="view_task_window">
         <div>Task Name: <span id="this_task_name"></span></div>
         <div>Description: <span id="this_task_description"></span></div>
@@ -45,6 +37,12 @@
             <div>Time: <span id="this_task_deadline_time"></span></div>
         </div>
         Date Created: <span id="this_task_date_created"></span>
+    </div>
+
+    <!-- error message pop -->
+    <div id="error_message_window">
+        <div id="error_message"></div>
+        <button id="ok_button">Ok</button>
     </div>
     <header>
         <div id="greeting">
